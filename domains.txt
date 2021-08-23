@@ -1,9 +1,10 @@
 blackhat.nz
+blackhat.nz
 google.com
-
 google.co.nz
 facebook.com
 facebook.com
+
 stuff.co.nz
 trademe.co.nz
 iitvnz.co.nz
@@ -19,3 +20,9 @@ superuser.com
 wordpress.com
 infosecinstitute.com
 tecmint.com
+
+dell.com
+hp.com
+apple.com
+philips.com
+owasp.org

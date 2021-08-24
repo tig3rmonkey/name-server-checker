@@ -6,7 +6,7 @@ Bash script that scans a list of domain names (provided in "domains.txt") for th
 * Checks for duplicate domain names supplied in the "domains.txt" file
 * Checks total number of domain names provided.
 * Checks whether the domain names are less than 4 characters long as they are likely invalid and/or spaces.
-* Results will also output to two files: tmp.csv (basic ns scan - no grouping) and grouped_ns_results.csv (this has the name servers ordered alphabetically, in effect grouping similar name servers)
+* Results will also output automatically to a csv file in the same directory (this has the name servers ordered alphabetically, in effect grouping domains that are using similar name servers)
 
 VERSION 1.1 IMPOVEMENTS:
 * Added numbering next to each domain/output
@@ -27,7 +27,7 @@ chmod +x nschecker.sh
 # Run script:
 ./nschecker.sh 
 
-# Check stdout, tmp.csv, and grouped_ns_results.csv for the results.
+# Check stdout and grouped_ns_results.csv for the results.
 cat tmp.csv
 cat grouped_ns_results.csv
 

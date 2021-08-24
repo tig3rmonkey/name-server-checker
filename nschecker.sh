@@ -22,7 +22,7 @@ _________ .__                   __
 
 EOF
 
-# Define Vars
+# Define variables
 uniqcount=`uniq -d domains.txt | wc -l`
 intvar=1
 tmpcsv="tmp.csv"
@@ -49,12 +49,11 @@ while read x; do
 	printf "%s %s ${padding:${#x}}"
 	printf "%s %s ${padding:${#x}}" >> $tmpcsv
 	
-	# Hack because numbering throws out formating when moving from single digits
+	# Hack because numbering throws out formatting when moving from single digits
 	if [ "${#intvar}" == 2 ]; then
 		echo -n "  "
 	elif [ "${#intvar}" == 3 ]; then
 		echo -n " "
-	
 	elif [ "${#intvar}" == 4 ]; then
 		echo -n ""
 	else
@@ -67,18 +66,25 @@ while read x; do
 		myarray=($(for each in ${myarray[@]}; do echo $each; done | sort))
 		echo ${myarray[@]}
 		echo ${myarray[@]} >> $tmpcsv
-	
 	else
 		echo -e "\033[41m!! WARNING: THE DOMAIN IS LESS THAN 4 CHARACTERS LONG - PLEASE CHECK THE \"domains.txt\" FILE\033[m"
 		echo -e "!! WARNING: THE DOMAIN IS LESS THAN 4 CHARACTERS LONG - PLEASE CHECK THE \"domains.txt\" FILE" >> $tmpcsv
 	fi
 	
 	intvar=$((intvar+1))
-	#You MAY need to enable sleep if the results become a little skewed. 	
 	#sleep 1
 done < domains.txt
 
 sort -b -k 2 $tmpcsv > $results
+rm $tmpcsv
+
+# Lazy formatting
+cat << "EOF"
+
+
+EOF
+
+echo -e "\033[44mResults will also output to $results (this has the name servers ordered alphabetically, in effect grouping similar name servers)\033[m"
 
 # Lazy formatting
 cat << "EOF"

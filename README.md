@@ -6,13 +6,13 @@ Bash script that scans a list of domain names for a desired DNS record and outpu
 * Checks for duplicate domain names in the "domains.txt" file
 * Checks total number of domain names provided.
 * Checks whether the domain names are less than 4 characters long as they are likely invalid and/or spaces.
-* Results will also output automatically to a csv file in the same directory (this has the name servers ordered alphabetically, in effect grouping domains that are using similar name servers)
+* Results will be automatically exported to a csv file in the same directory (this has the results ordered alphabetically, in effect grouping domains that are using similar DNS records)
 
 # VERSION 1.1 IMPOVEMENTS:
 * Added numbering next to each domain/output on the terminal
 * Better formatting/output for larger domain lists
 * Red/color text for warning messages
-* Results are now automatically outputed to a csv file and grouped alphabelically by name servers
+* Results are now automatically outputed to a csv file and grouped alphabelically by by the results.
 
 # VERSION 1.2 IMPROVEMENTS:
 * Help menu
@@ -27,7 +27,7 @@ Bash script that scans a list of domain names for a desired DNS record and outpu
 # Make the file executable
 chmod +x nschecker.sh
 
-# Run script, specifying which DNS record you'd like to gather
+# Run script, specifying which DNS record you'd like to retrieve and sort by
 ./nschecker.sh -a mx
 
 # Check stdout and results.csv for the results.

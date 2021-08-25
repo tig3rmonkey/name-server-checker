@@ -121,7 +121,7 @@ cat << "EOF"
 
 EOF
 
-echo -e "\033[44mResults will also output to $results (this has the name servers ordered alphabetically, in effect grouping similar name servers) \033[m"
+echo -e "\033[44mThe results will also be outputted to $results and ordered alphabetically, in effect grouping similar records together \033[m"
 
 
 # Lazy formatting

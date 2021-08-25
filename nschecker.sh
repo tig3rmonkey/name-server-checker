@@ -22,11 +22,48 @@ _________ .__                   __
 
 EOF
 
+usage() {
+    cat << EOF
+    Usage: $(basename "${BASH_SOURCE[0]}") [-h|a] arg1
+	   root@#: ./$(basename "${BASH_SOURCE[0]}") -a ns
+
+    About:
+    A simple bash script designed to scan a list of domain names (provided in a 
+    "domains.txt" file) and output the results of the desired DNS records in 
+    a sorted order, in effect grouping similar results.
+
+    Available options:
+    
+    -h, --help      Print this help menu and exit
+    -a, --arg       [Required] Name Server record you'd like bulk scanned and 
+                    sorted. E.g. a|mx|ns|aaaa
+
+
+EOF
+    exit
+}
+
+#checking # of args provided
+if [ "$#" -lt 2 ]; then
+        usage
+fi
+
+# Flag so that -a etc align properly.
+while getopts a:arg:h:help: flag
+do
+    case "${flag}" in
+        a) arg=${OPTARG};;
+        arg) arg=${OPTARG};;
+        #h) help=${OPTARG};;
+        #help) help=${OPTARG};;
+    esac
+done
+
 # Define variables
 uniqcount=`uniq -d domains.txt | wc -l`
 intvar=1
-tmpcsv="tmp.csv"
-results="grouped_ns_results.csv"
+tmpcsv="/tmp/tmp.csv"
+results="results.csv"
 
 echo -n "Domains Being Queried: " && wc -l domains.txt | awk '{print $1}'
 echo -n "Duplicate Entries Found: "  && echo "$uniqcount" | awk '{print $1}'
@@ -62,7 +99,7 @@ while read x; do
 	
 	if [ ${#x} -ge 4 ]; then	
 		#Sort the results before returning them as they can return in any order
-		IFS=" " read -a myarray <<< `dig ns $x +short | xargs`
+		IFS=" " read -a myarray <<< `dig $x $arg +short | xargs`
 		myarray=($(for each in ${myarray[@]}; do echo $each; done | sort))
 		echo ${myarray[@]}
 		echo ${myarray[@]} >> $tmpcsv
@@ -84,11 +121,11 @@ cat << "EOF"
 
 EOF
 
-echo -e "\033[44mResults will also output to $results (this has the name servers ordered alphabetically, in effect grouping similar name servers)\033[m"
+echo -e "\033[44mResults will also output to $results (this has the name servers ordered alphabetically, in effect grouping similar name servers) \033[m"
+
 
 # Lazy formatting
 cat << "EOF"
 
 
 EOF
-
